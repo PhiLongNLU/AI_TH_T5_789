@@ -1,4 +1,4 @@
-package chapter2.agent_AB; 
+package Agent_AB; 
 
 public abstract class Action {
 	public abstract boolean isNoOp();

@@ -1,4 +1,4 @@
-package chapter2.agent_AB; 
+package Agent_AB;
 
 public class Environment {
 	public static final Action MOVE_LEFT = new DynamicAction("LEFT");
@@ -22,6 +22,8 @@ public class Environment {
 	// add an agent into the enviroment
 	public void addAgent(Agent agent, String location) {
 		// TODO
+		this.agent = agent;
+		this.envState.setAgentLocation(location);
 	}
 
 	public EnvironmentState getCurrentState() {
@@ -31,14 +33,28 @@ public class Environment {
 	// Update enviroment state when agent do an action
 	public EnvironmentState executeAction(Action action) {
 		// TODO
-		return envState;
+		if (!action.isNoOp()) {
+			if(envState.getAgentLocation().equals(Environment.LOCATION_A)) {
+				envState.setLocationState(LOCATION_A, LocationState.CLEAN);
+				envState.setAgentLocation(LOCATION_B);
+				return envState;
+			}
+			else {
+				envState.setLocationState(LOCATION_B, LocationState.CLEAN);
+				envState.setAgentLocation(LOCATION_B);
+				return envState;
+			}
+		} else {
+			return envState;
+		}
 	}
 
 	// get percept<AgentLocation, LocationState> at the current location where agent
 	// is in.
 	public Percept getPerceptSeenBy() {
 		// TODO
-		return null;
+		String environmentLocation = this.envState.getAgentLocation();
+		return new Percept(this.envState.getAgentLocation(), this.envState.getLocationState(environmentLocation));
 	}
 
 	public void step() {
