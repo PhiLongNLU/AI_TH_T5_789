@@ -1,4 +1,4 @@
-package Queen;
+package student;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,10 +39,11 @@ public class Node {
 
 	public int getH() {
 		int heuristic = 0;
-		// Enter your code here
-		for(int i = 0 ; i < this.state.length ; i++) {
-			for(int j = i + 1 ; j < this.state.length ; j++ ) {
-				if(state[i].isConflict(state[j])) heuristic++;
+		for (int i = 0; i < N-1; i++) {
+			for (int j = i+1; j < state.length; j++) {
+				if(state[i].isConflict(state[j])) {
+					heuristic++;
+				}
 			}
 		}
 		return heuristic;
@@ -51,22 +52,40 @@ public class Node {
 	public List<Node> generateAllCandidates() {
 		List<Node> result = new ArrayList<Node>();
 
-		// Enter your code here
-		for(int i = 0 ; i < this.state.length ; i++) {
-			Node next = new Node(this.state);
-			next.state[i].move();
-			result.add(next);
+		for (int i = 0; i < N; i++) {
+			Node node=new Node(this.state);
+			state[i].move();
+			result.add(node);
 		}
 		return result;
 	}
-
+ 
+	public Node getBestCandidate() {
+		List<Node> list = generateAllCandidates();
+		Node result = null;
+		int temp = Integer.MAX_VALUE;
+		for (Node node : list) {
+			if(node.getH()<temp) {
+				temp=node.getH();
+				result=node;
+			}
+		}
+		return result;
+	}
+	public Node execute(Node initialState) {
+		Node current = initialState;
+		while(true) {
+			Node neighbor = current.getBestCandidate();
+			if(neighbor.getH()<current.getH()) {
+				current = neighbor;
+			}else {
+				return current;
+			}
+		}
+	}
 	public Node selectNextRandomCandidate() {
 		// Enter your code here
-		Random random = new Random();
-		int location = random.nextInt(N + 1);
-		Node nextState = new Node(state);
-		nextState.state[location].move();
-		return nextState;
+		return generateAllCandidates().get((int)(Math.random()*N));
 	}
 
 	public void displayBoard() {

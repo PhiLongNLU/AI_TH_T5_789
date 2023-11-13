@@ -1,4 +1,4 @@
-package Queen;
+package student;
 
 public class Queen {
 	private int row;
@@ -11,19 +11,22 @@ public class Queen {
 	}
 
 	public void move() {
-		if(row < Node.N - 1) {
-			this.row++;
+		// Enter your code here
+		int value = row+1;
+		if(value==Node.N) {
+			row=0;
 		}else {
-			this.row = 0;
+			row++;
 		}
 	}
 
 	// check whether this Queen can attack the given Queen (q)
 	public boolean isConflict(Queen q) {
 		// Enter your code here
-		if(this.row == q.row) return true;
-		else if(Math.abs(this.row - q.row) - Math.abs(this.column) == 0) return true;
-		return false;
+		if(row==q.row)return false;
+		if(column==q.column)return false;
+		if(Math.abs(row-q.row)==Math.abs(column-q.column))return false;
+		return true;
 	}
 
 	public int getRow() {
