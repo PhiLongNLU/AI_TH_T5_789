@@ -22,6 +22,7 @@ public class MiniMaxSearchAlgo implements ISearchAlgo {
 	// return v
 	public int maxValue(Node node) {
 		// Enter your code here
+		System.out.print(node.getLabel() + " ");
 		if (node.isTerminal())
 			return node.getValue();
 		else {
@@ -46,6 +47,7 @@ public class MiniMaxSearchAlgo implements ISearchAlgo {
 	// return v
 
 	public int minValue(Node node) {
+		System.out.print(node.getLabel() + " ");
 		if (node.isTerminal())
 			return node.getValue();
 		else {

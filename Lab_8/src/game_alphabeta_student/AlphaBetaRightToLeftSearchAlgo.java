@@ -25,6 +25,7 @@ public class AlphaBetaRightToLeftSearchAlgo implements ISearchAlgo{
 
 		public int maxValue(Node node, int alpha, int beta) {
 			// Enter your code here
+			System.out.print(node.getLabel());
 			if(node.isTerminal()) return node.getValue();
 			int maxVal = Integer.MIN_VALUE;
 			List<Node> child = node.getChildren();
@@ -47,6 +48,7 @@ public class AlphaBetaRightToLeftSearchAlgo implements ISearchAlgo{
 
 		public int minValue(Node node, int alpha, int beta) {
 			// Enter your code here
+			System.out.print(node.getLabel());
 			if(node.isTerminal()) return node.getValue();
 			int minVal = Integer.MAX_VALUE;
 			List<Node> child = node.getChildren();

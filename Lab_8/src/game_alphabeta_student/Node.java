@@ -8,6 +8,7 @@ public class Node {
 	private String label;
 	private int value;
 	private List<Node> children = new ArrayList<Node>();
+	private Node parent;
 
 	// use for non-terminal node
 	public Node(String label) {
@@ -38,6 +39,9 @@ public class Node {
 		this.value = value;
 	}
 
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
 	// add a child to this node
 	public void addChild(Node that) {
 		this.children.add(that);
