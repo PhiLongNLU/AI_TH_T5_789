@@ -52,6 +52,7 @@ public class MiniMaxSearchAlgo implements ISearchAlgo {
 			return node.getValue();
 		else {
 			int currentVal = Integer.MAX_VALUE;
+			
 
 			List<Node> childNode = node.getChildren();
 			childNode.sort(Node.LabelComparator);

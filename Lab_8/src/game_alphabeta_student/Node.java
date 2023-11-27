@@ -42,9 +42,31 @@ public class Node {
 	public void setParent(Node parent) {
 		this.parent = parent;
 	}
+	
+	public static void printPath(Node node) {
+		if(node.isTerminal()) {
+			System.out.print(node + " ");
+			return;
+		}
+		else {
+			System.out.print(node + " ");
+			printPath(node.getParent());
+		}
+	}
+	private Node getParent() {
+		// TODO Auto-generated method stub
+		return this.parent;
+	}
+
 	// add a child to this node
 	public void addChild(Node that) {
 		this.children.add(that);
+	}
+	
+	public Node max (Node o) {
+		if(this.getValue() > o.getValue()) return this;
+		else if(this.getValue() < o.value) return o;
+		else return this;
 	}
 
 	// check whether this node is terminal or not. The terminal node is assigned a
