@@ -3,24 +3,13 @@ package game_alphabeta_student;
 import java.util.List;
 
 public class FindBestWay  {
-	// function ALPHA-BETA-SEARCH(state) returns an action
-	// inputs: state, current state in game
-	// v <- MAX-VALUE(state, Integer.MIN_VALUE , Integer.MAX_VALUE)
-	// return the action in SUCCESSORS(state) with value v
+	
 	public Node execute(Node node) {
 		// Enter your code here
 		return maxValue(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 
-	// function MAX-VALUE(state, alpha, beta) returns a utility value
-	// if TERMINAL-TEST(state) then return UTILITY(state)
-	// v <- MIN_VALUE;
-	// for each s in SUCCESSORS(state) do
-	// v <- MAX(v, MIN-VALUE(s, alpha, beta))
-	// if v >= beta then return v
-	// alpha <- MAX(alpha, v)
-	// return v
-
+	
 	public Node maxValue(Node node, int alpha, int beta) {
 		// Enter your code here
 
@@ -45,38 +34,30 @@ public class FindBestWay  {
 		}
 		return maxNode;
 	}
-	// function MIN-VALUE(state, alpha , beta) returns a utility value
-	// if TERMINAL-TEST(state) then return UTILITY(state)
-	// v <- Integer.MAX_VALUE
-	// for each s in SUCCESSORS(state) do
-	// v <- MIN(v, MAX-VALUE(s, alpha , beta))
-	// if v <= alpha then return v
-	// beta <- MIN(beta ,v)
-	// return v
-
+	
 	public Node minValue(Node node, int alpha, int beta) {
 		// Enter your code here
 
 		if (node.isTerminal())
 			return node;
 
-		int maxVal = Integer.MAX_VALUE;
+		int minVal = Integer.MAX_VALUE;
 		List<Node> child = node.getChildren();
-		Node maxNode = null;
+		Node minNode = null;
 
 		child.sort(Node.LabelComparator);
 
 		for (int i = 0; i < child.size(); i++) {
 			child.get(i).setParent(node);
-			if(maxNode == null) {
-				maxNode = minValue(child.get(i), alpha, beta);
+			if(minNode == null) {
+				minNode = minValue(child.get(i), alpha, beta);
 			}
-			maxNode = maxNode.max(minValue(child.get(i), alpha, beta));
-			if (maxVal <= beta)
-				return maxNode;
-			alpha = Math.min(alpha, maxVal);
+			minNode = minNode.min(maxValue(child.get(i), alpha, beta));
+			if (minVal <= alpha)
+				return minNode;
+			beta = Math.min(alpha, minVal);
 		}
-		return maxNode;
+		return minNode;
 	}
 
 	public static void main(String[] args) {

@@ -44,7 +44,7 @@ public class Node {
 	}
 	
 	public static void printPath(Node node) {
-		if(node.isTerminal()) {
+		if(node.getParent() == null) {
 			System.out.print(node + " ");
 			return;
 		}
@@ -103,4 +103,11 @@ public class Node {
 				return -o1.getLabel().compareTo(o2.getLabel());
 			}
 		};
+
+		public Node min(Node o) {
+			// TODO Auto-generated method stub
+			if(this.getValue() < o.getValue()) return this;
+			else if(this.getValue() > o.value) return o;
+			else return this;
+		}
 }
